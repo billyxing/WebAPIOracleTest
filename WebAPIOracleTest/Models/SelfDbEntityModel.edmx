@@ -1,0 +1,613 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SELF_COMPANYINFO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" MaxLength="50" />
+          <Property Name="ADDRESS" Type="varchar2" MaxLength="100" />
+          <Property Name="TEL" Type="varchar2" MaxLength="20" />
+          <Property Name="ORGCODE" Type="varchar2" MaxLength="50" />
+          <Property Name="OWNER" Type="varchar2" MaxLength="20" />
+          <Property Name="GSSH" Type="varchar2" MaxLength="50" />
+          <Property Name="DSSH" Type="varchar2" MaxLength="50" />
+          <Property Name="REGSN" Type="varchar2" MaxLength="50" />
+          <Property Name="MISC" Type="varchar2" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SELF_DOWNLOADCODE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="DOWNLOADCODE" Type="varchar2" MaxLength="8" />
+          <Property Name="ORDERID" Type="number" Precision="19" Scale="0" />
+          <Property Name="REF_CODE" Type="varchar2" MaxLength="32" />
+          <Property Name="AUTH_CODE" Type="varchar2" MaxLength="32" />
+          <Property Name="CREATE_TIME" Type="date" />
+          <Property Name="STATE" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SELF_ORDERINFO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="ITEMID" Type="number" Precision="38" Scale="0" />
+          <Property Name="CERTSN" Type="varchar2" MaxLength="50" />
+          <Property Name="NEWCERTSN" Type="varchar2" MaxLength="50" />
+          <Property Name="ORDER_STATE" Type="varchar2" MaxLength="20" />
+          <Property Name="ORDER_DATE" Type="date" />
+          <Property Name="PAYMENT_TYPE" Type="number" Precision="19" Scale="0" />
+          <Property Name="PAYMENT_STATE" Type="varchar2" MaxLength="20" />
+          <Property Name="PAYMENT_DATE" Type="date" />
+          <Property Name="PAYMENT_ID" Type="varchar2" MaxLength="100" />
+          <Property Name="FEE" Type="float" Precision="126" Scale="0" />
+          <Property Name="MAILTYPE" Type="number" Precision="19" Scale="0" />
+          <Property Name="MAIL_ADDRESS" Type="varchar2" MaxLength="200" />
+          <Property Name="MAIL_NAME" Type="varchar2" MaxLength="20" />
+          <Property Name="MAIL_TELNUM" Type="varchar2" MaxLength="20" />
+          <Property Name="MAIL_STATE" Type="varchar2" MaxLength="20" />
+          <Property Name="MAIL_DATE" Type="date" />
+          <Property Name="MISC" Type="varchar2" MaxLength="200" />
+          <Property Name="ORDER_ID" Type="varchar2" MaxLength="20" />
+          <Property Name="USER_ID" Type="number" Precision="19" Scale="0" />
+          <Property Name="MAIL_POSTCODE" Type="varchar2" MaxLength="6" />
+          <Property Name="MAIL_SN" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SELF_USRS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="UNAME" Type="varchar2" MaxLength="50" />
+          <Property Name="PSWD" Type="varchar2" MaxLength="50" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="10" />
+          <Property Name="AFTERCERSN" Type="varchar2" MaxLength="50" />
+          <Property Name="BEFORCERSN" Type="varchar2" MaxLength="50" />
+          <Property Name="NOWCERSN" Type="varchar2" MaxLength="50" />
+          <Property Name="UNUSED01" Type="varchar2" MaxLength="200" />
+          <Property Name="UNUSED02" Type="varchar2" MaxLength="200" />
+          <Property Name="UNUSED03" Type="varchar2" MaxLength="200" />
+          <Property Name="PHNO" Type="varchar2" MaxLength="20" />
+          <Property Name="UEMAIL" Type="varchar2" MaxLength="50" />
+          <Property Name="MPHNO" Type="varchar2" MaxLength="20" />
+          <Property Name="SENDADDS" Type="varchar2" MaxLength="200" />
+          <Property Name="USERID" Type="varchar2" MaxLength="50" />
+          <Property Name="SENDNAME" Type="varchar2" MaxLength="20" />
+          <Property Name="SENDNO" Type="varchar2" MaxLength="20" />
+          <Property Name="SENDCODE" Type="varchar2" MaxLength="10" />
+          <Property Name="DOWNCODE" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TBCERT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="RECORDID" Type="number" Precision="19" Scale="0" />
+          <Property Name="CN" Type="varchar2" MaxLength="100" />
+          <Property Name="DN" Type="varchar2" MaxLength="100" />
+          <Property Name="STARTDATE" Type="date" />
+          <Property Name="ENDDATE" Type="date" />
+          <Property Name="CERTTYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="KEYTYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="20" />
+          <Property Name="CERTREF" Type="varchar2" MaxLength="100" />
+          <Property Name="INVALID" Type="number" Precision="19" Scale="0" />
+          <Property Name="PUBLICKEY" Type="varchar2" MaxLength="4000" />
+          <Property Name="TBCERTTYPEID" Type="number" Precision="19" Scale="0" />
+          <Property Name="ITEMID" Type="number" Precision="19" Scale="0" />
+          <Property Name="ENCSN" Type="varchar2" MaxLength="100" />
+          <Property Name="SIGNSN" Type="varchar2" MaxLength="100" />
+          <Property Name="AUTHORIZECODE" Type="varchar2" MaxLength="100" />
+          <Property Name="KEYID" Type="varchar2" MaxLength="100" />
+          <Property Name="QUALITYSTATUS" Type="number" Precision="19" Scale="0" />
+          <Property Name="CTMLNAME" Type="varchar2" MaxLength="255" />
+          <Property Name="LASTCERTSN" Type="varchar2" MaxLength="100" />
+          <Property Name="ADMINCERTDN" Type="varchar2" MaxLength="512" />
+          <Property Name="ADMINCERTSN" Type="varchar2" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TBCERTTASK">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="CANO" Type="varchar2" MaxLength="50" />
+          <Property Name="RECORDID" Type="number" Precision="19" Scale="0" />
+          <Property Name="TBCERTID" Type="number" Precision="19" Scale="0" />
+          <Property Name="TBCERTTYPEID" Type="number" Precision="19" Scale="0" />
+          <Property Name="ITEMID" Type="number" Precision="19" Scale="0" />
+          <Property Name="TBTYPEINFO" Type="number" Precision="19" Scale="0" />
+          <Property Name="STATUSID" Type="number" Precision="19" Scale="0" />
+          <Property Name="PAYSTATUSID" Type="number" Precision="19" Scale="0" />
+          <Property Name="ESTATUSID" Type="number" Precision="19" Scale="0" />
+          <Property Name="HANDLENAME" Type="varchar2" MaxLength="50" />
+          <Property Name="HANDLEPHONE" Type="varchar2" MaxLength="50" />
+          <Property Name="HANDLEID" Type="varchar2" MaxLength="50" />
+          <Property Name="ISKEY" Type="varchar2" MaxLength="2" />
+          <Property Name="FEE" Type="number" Precision="10" Scale="3" />
+          <Property Name="APPLYID" Type="number" Precision="22" Scale="0" />
+          <Property Name="APPLYDATE" Type="date" />
+          <Property Name="DEALNAME" Type="number" Precision="22" Scale="0" />
+          <Property Name="DEALDATE" Type="date" />
+          <Property Name="SN" Type="varchar2" MaxLength="100" />
+          <Property Name="CERTTASKSIGN" Type="varchar2" MaxLength="4000" />
+          <Property Name="PUBLICKEY" Type="varchar2" MaxLength="4000" />
+          <Property Name="TASKCONTENT" Type="varchar2" MaxLength="4000" />
+          <Property Name="REMARK" Type="varchar2" MaxLength="500" />
+          <Property Name="APPLYTYPE" Type="varchar2" MaxLength="2" />
+          <Property Name="AUTHORIZATIONCODE" Type="varchar2" MaxLength="500" />
+          <Property Name="VERIFYDATE" Type="date" />
+          <Property Name="FINISHDATE" Type="date" />
+          <Property Name="REQSN" Type="varchar2" MaxLength="500" />
+          <Property Name="ISRECEIPT" Type="varchar2" MaxLength="500" />
+          <Property Name="DISTRIBUTIONMESSAGE" Type="varchar2" MaxLength="500" />
+          <Property Name="KEYTYPE" Type="number" Precision="19" Scale="0" />
+          <Property Name="JINSUITYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="STARTDATE" Type="date" />
+          <Property Name="ENDDATE" Type="date" />
+          <Property Name="RECEIVEDATE" Type="date" />
+          <Property Name="ISBACK" Type="varchar2" MaxLength="20" />
+          <Property Name="BACKCANO" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBITEM">
+          <Key>
+            <PropertyRef Name="ITEMID" />
+          </Key>
+          <Property Name="ITEMID" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="ITEM" Type="varchar2" MaxLength="50" />
+          <Property Name="FREEPERIOD" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="ISLIMIT" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="COUNT" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="USECOUNT" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="ITEMLEVEL" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="ITEMCLIENT" Type="varchar2" MaxLength="500" />
+          <Property Name="ITEMDEVELOPERS" Type="varchar2" MaxLength="500" />
+          <Property Name="TEMPLATEID" Type="number" Precision="19" Scale="0" />
+          <Property Name="REMARK" Type="varchar2" MaxLength="1000" />
+          <Property Name="ITEMCODE" Type="varchar2" MaxLength="50" />
+          <Property Name="TBITEMTYPEID" Type="number" Precision="19" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBUSERINFO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="USERCODE" Type="varchar2" MaxLength="20" />
+          <Property Name="USERNAME" Type="varchar2" MaxLength="50" />
+          <Property Name="AREACODE" Type="varchar2" MaxLength="50" />
+          <Property Name="ISSTAFF" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="AGENCYID" Type="number" Precision="19" Scale="0" />
+          <Property Name="CERTSN" Type="varchar2" MaxLength="100" />
+          <Property Name="IDCARD" Type="varchar2" MaxLength="20" />
+          <Property Name="PHONE" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="SELF_COMPANYINFO" EntityType="Self.SELF_COMPANYINFO" Schema="MAPTEST" store:Type="Tables" />
+          <EntitySet Name="SELF_DOWNLOADCODE" EntityType="Self.SELF_DOWNLOADCODE" Schema="MAPTEST" store:Type="Tables" />
+          <EntitySet Name="SELF_ORDERINFO" EntityType="Self.SELF_ORDERINFO" Schema="MAPTEST" store:Type="Tables" />
+          <EntitySet Name="SELF_USRS" EntityType="Self.SELF_USRS" Schema="MAPTEST" store:Type="Tables" />
+          <EntitySet Name="TBCERT" EntityType="Self.TBCERT" Schema="MAPTEST" store:Type="Tables" />
+          <EntitySet Name="TBCERTTASK" EntityType="Self.TBCERTTASK" Schema="MAPTEST" store:Type="Tables" />
+          <EntitySet Name="TBITEM" EntityType="Self.TBITEM" Schema="MAPTEST" store:Type="Tables" />
+          <EntitySet Name="TBUSERINFO" EntityType="Self.TBUSERINFO" Schema="MAPTEST" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SELF_COMPANYINFO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TEL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ORGCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OWNER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GSSH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DSSH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="REGSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MISC" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SELF_DOWNLOADCODE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="DOWNLOADCODE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="ORDERID" Type="Int64" />
+          <Property Name="REF_CODE" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="AUTH_CODE" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="CREATE_TIME" Type="DateTime" />
+          <Property Name="STATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SELF_ORDERINFO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="ITEMID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CERTSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NEWCERTSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ORDER_STATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ORDER_DATE" Type="DateTime" />
+          <Property Name="PAYMENT_TYPE" Type="Int64" />
+          <Property Name="PAYMENT_STATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PAYMENT_DATE" Type="DateTime" />
+          <Property Name="PAYMENT_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FEE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="MAILTYPE" Type="Int64" />
+          <Property Name="MAIL_ADDRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MAIL_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MAIL_TELNUM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MAIL_STATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MAIL_DATE" Type="DateTime" />
+          <Property Name="MISC" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ORDER_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="USER_ID" Type="Int64" />
+          <Property Name="MAIL_POSTCODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="MAIL_SN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SELF_USRS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="UNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PSWD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AFTERCERSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BEFORCERSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOWCERSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UNUSED01" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UNUSED02" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UNUSED03" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PHNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UEMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MPHNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SENDADDS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SENDNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SENDNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SENDCODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DOWNCODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBCERT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="RECORDID" Type="Int64" />
+          <Property Name="CN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="STARTDATE" Type="DateTime" />
+          <Property Name="ENDDATE" Type="DateTime" />
+          <Property Name="CERTTYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="KEYTYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CERTREF" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="INVALID" Type="Int64" />
+          <Property Name="PUBLICKEY" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="TBCERTTYPEID" Type="Int64" />
+          <Property Name="ITEMID" Type="Int64" />
+          <Property Name="ENCSN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SIGNSN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AUTHORIZECODE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="KEYID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="QUALITYSTATUS" Type="Int64" />
+          <Property Name="CTMLNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LASTCERTSN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ADMINCERTDN" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="ADMINCERTSN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBCERTTASK">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="CANO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RECORDID" Type="Int64" />
+          <Property Name="TBCERTID" Type="Int64" />
+          <Property Name="TBCERTTYPEID" Type="Int64" />
+          <Property Name="ITEMID" Type="Int64" />
+          <Property Name="TBTYPEINFO" Type="Int64" />
+          <Property Name="STATUSID" Type="Int64" />
+          <Property Name="PAYSTATUSID" Type="Int64" />
+          <Property Name="ESTATUSID" Type="Int64" />
+          <Property Name="HANDLENAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HANDLEPHONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HANDLEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ISKEY" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="FEE" Type="Decimal" Precision="10" Scale="3" />
+          <Property Name="APPLYID" Type="Decimal" Precision="22" Scale="0" />
+          <Property Name="APPLYDATE" Type="DateTime" />
+          <Property Name="DEALNAME" Type="Decimal" Precision="22" Scale="0" />
+          <Property Name="DEALDATE" Type="DateTime" />
+          <Property Name="SN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CERTTASKSIGN" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="PUBLICKEY" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="TASKCONTENT" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="REMARK" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="APPLYTYPE" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="AUTHORIZATIONCODE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="VERIFYDATE" Type="DateTime" />
+          <Property Name="FINISHDATE" Type="DateTime" />
+          <Property Name="REQSN" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ISRECEIPT" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DISTRIBUTIONMESSAGE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="KEYTYPE" Type="Int64" />
+          <Property Name="JINSUITYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STARTDATE" Type="DateTime" />
+          <Property Name="ENDDATE" Type="DateTime" />
+          <Property Name="RECEIVEDATE" Type="DateTime" />
+          <Property Name="ISBACK" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BACKCANO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBITEM">
+          <Key>
+            <PropertyRef Name="ITEMID" />
+          </Key>
+          <Property Name="ITEMID" Type="Int64" Nullable="false" />
+          <Property Name="ITEM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FREEPERIOD" Type="Int64" Nullable="false" />
+          <Property Name="ISLIMIT" Type="Int64" Nullable="false" />
+          <Property Name="COUNT" Type="Int64" Nullable="false" />
+          <Property Name="USECOUNT" Type="Int64" Nullable="false" />
+          <Property Name="ITEMLEVEL" Type="Int64" Nullable="false" />
+          <Property Name="ITEMCLIENT" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ITEMDEVELOPERS" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TEMPLATEID" Type="Int64" />
+          <Property Name="REMARK" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ITEMCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TBITEMTYPEID" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBUSERINFO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="USERCODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AREACODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ISSTAFF" Type="Int64" Nullable="false" />
+          <Property Name="AGENCYID" Type="Int64" />
+          <Property Name="CERTSN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IDCARD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="SelfDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SELF_COMPANYINFO" EntityType="Self.SELF_COMPANYINFO" />
+          <EntitySet Name="SELF_DOWNLOADCODE" EntityType="Self.SELF_DOWNLOADCODE" />
+          <EntitySet Name="SELF_ORDERINFO" EntityType="Self.SELF_ORDERINFO" />
+          <EntitySet Name="SELF_USRS" EntityType="Self.SELF_USRS" />
+          <EntitySet Name="TBCERTs" EntityType="Self.TBCERT" />
+          <EntitySet Name="TBCERTTASKs" EntityType="Self.TBCERTTASK" />
+          <EntitySet Name="TBITEMs" EntityType="Self.TBITEM" />
+          <EntitySet Name="TBUSERINFOes" EntityType="Self.TBUSERINFO" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="SelfDbEntities">
+          <EntitySetMapping Name="SELF_COMPANYINFO">
+            <EntityTypeMapping TypeName="Model.SELF_COMPANYINFO">
+              <MappingFragment StoreEntitySet="SELF_COMPANYINFO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="TEL" ColumnName="TEL" />
+                <ScalarProperty Name="ORGCODE" ColumnName="ORGCODE" />
+                <ScalarProperty Name="OWNER" ColumnName="OWNER" />
+                <ScalarProperty Name="GSSH" ColumnName="GSSH" />
+                <ScalarProperty Name="DSSH" ColumnName="DSSH" />
+                <ScalarProperty Name="REGSN" ColumnName="REGSN" />
+                <ScalarProperty Name="MISC" ColumnName="MISC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SELF_DOWNLOADCODE">
+            <EntityTypeMapping TypeName="Model.SELF_DOWNLOADCODE">
+              <MappingFragment StoreEntitySet="SELF_DOWNLOADCODE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DOWNLOADCODE" ColumnName="DOWNLOADCODE" />
+                <ScalarProperty Name="ORDERID" ColumnName="ORDERID" />
+                <ScalarProperty Name="REF_CODE" ColumnName="REF_CODE" />
+                <ScalarProperty Name="AUTH_CODE" ColumnName="AUTH_CODE" />
+                <ScalarProperty Name="CREATE_TIME" ColumnName="CREATE_TIME" />
+                <ScalarProperty Name="STATE" ColumnName="STATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SELF_ORDERINFO">
+            <EntityTypeMapping TypeName="Model.SELF_ORDERINFO">
+              <MappingFragment StoreEntitySet="SELF_ORDERINFO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ITEMID" ColumnName="ITEMID" />
+                <ScalarProperty Name="CERTSN" ColumnName="CERTSN" />
+                <ScalarProperty Name="NEWCERTSN" ColumnName="NEWCERTSN" />
+                <ScalarProperty Name="ORDER_STATE" ColumnName="ORDER_STATE" />
+                <ScalarProperty Name="ORDER_DATE" ColumnName="ORDER_DATE" />
+                <ScalarProperty Name="PAYMENT_TYPE" ColumnName="PAYMENT_TYPE" />
+                <ScalarProperty Name="PAYMENT_STATE" ColumnName="PAYMENT_STATE" />
+                <ScalarProperty Name="PAYMENT_DATE" ColumnName="PAYMENT_DATE" />
+                <ScalarProperty Name="PAYMENT_ID" ColumnName="PAYMENT_ID" />
+                <ScalarProperty Name="FEE" ColumnName="FEE" />
+                <ScalarProperty Name="MAILTYPE" ColumnName="MAILTYPE" />
+                <ScalarProperty Name="MAIL_ADDRESS" ColumnName="MAIL_ADDRESS" />
+                <ScalarProperty Name="MAIL_NAME" ColumnName="MAIL_NAME" />
+                <ScalarProperty Name="MAIL_TELNUM" ColumnName="MAIL_TELNUM" />
+                <ScalarProperty Name="MAIL_STATE" ColumnName="MAIL_STATE" />
+                <ScalarProperty Name="MAIL_DATE" ColumnName="MAIL_DATE" />
+                <ScalarProperty Name="MISC" ColumnName="MISC" />
+                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="MAIL_POSTCODE" ColumnName="MAIL_POSTCODE" />
+                <ScalarProperty Name="MAIL_SN" ColumnName="MAIL_SN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SELF_USRS">
+            <EntityTypeMapping TypeName="Model.SELF_USRS">
+              <MappingFragment StoreEntitySet="SELF_USRS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UNAME" ColumnName="UNAME" />
+                <ScalarProperty Name="PSWD" ColumnName="PSWD" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="AFTERCERSN" ColumnName="AFTERCERSN" />
+                <ScalarProperty Name="BEFORCERSN" ColumnName="BEFORCERSN" />
+                <ScalarProperty Name="NOWCERSN" ColumnName="NOWCERSN" />
+                <ScalarProperty Name="UNUSED01" ColumnName="UNUSED01" />
+                <ScalarProperty Name="UNUSED02" ColumnName="UNUSED02" />
+                <ScalarProperty Name="UNUSED03" ColumnName="UNUSED03" />
+                <ScalarProperty Name="PHNO" ColumnName="PHNO" />
+                <ScalarProperty Name="UEMAIL" ColumnName="UEMAIL" />
+                <ScalarProperty Name="MPHNO" ColumnName="MPHNO" />
+                <ScalarProperty Name="SENDADDS" ColumnName="SENDADDS" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="SENDNAME" ColumnName="SENDNAME" />
+                <ScalarProperty Name="SENDNO" ColumnName="SENDNO" />
+                <ScalarProperty Name="SENDCODE" ColumnName="SENDCODE" />
+                <ScalarProperty Name="DOWNCODE" ColumnName="DOWNCODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBCERTs">
+            <EntityTypeMapping TypeName="Model.TBCERT">
+              <MappingFragment StoreEntitySet="TBCERT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RECORDID" ColumnName="RECORDID" />
+                <ScalarProperty Name="CN" ColumnName="CN" />
+                <ScalarProperty Name="DN" ColumnName="DN" />
+                <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
+                <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
+                <ScalarProperty Name="CERTTYPE" ColumnName="CERTTYPE" />
+                <ScalarProperty Name="KEYTYPE" ColumnName="KEYTYPE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="CERTREF" ColumnName="CERTREF" />
+                <ScalarProperty Name="INVALID" ColumnName="INVALID" />
+                <ScalarProperty Name="PUBLICKEY" ColumnName="PUBLICKEY" />
+                <ScalarProperty Name="TBCERTTYPEID" ColumnName="TBCERTTYPEID" />
+                <ScalarProperty Name="ITEMID" ColumnName="ITEMID" />
+                <ScalarProperty Name="ENCSN" ColumnName="ENCSN" />
+                <ScalarProperty Name="SIGNSN" ColumnName="SIGNSN" />
+                <ScalarProperty Name="AUTHORIZECODE" ColumnName="AUTHORIZECODE" />
+                <ScalarProperty Name="KEYID" ColumnName="KEYID" />
+                <ScalarProperty Name="QUALITYSTATUS" ColumnName="QUALITYSTATUS" />
+                <ScalarProperty Name="CTMLNAME" ColumnName="CTMLNAME" />
+                <ScalarProperty Name="LASTCERTSN" ColumnName="LASTCERTSN" />
+                <ScalarProperty Name="ADMINCERTDN" ColumnName="ADMINCERTDN" />
+                <ScalarProperty Name="ADMINCERTSN" ColumnName="ADMINCERTSN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBCERTTASKs">
+            <EntityTypeMapping TypeName="Model.TBCERTTASK">
+              <MappingFragment StoreEntitySet="TBCERTTASK">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CANO" ColumnName="CANO" />
+                <ScalarProperty Name="RECORDID" ColumnName="RECORDID" />
+                <ScalarProperty Name="TBCERTID" ColumnName="TBCERTID" />
+                <ScalarProperty Name="TBCERTTYPEID" ColumnName="TBCERTTYPEID" />
+                <ScalarProperty Name="ITEMID" ColumnName="ITEMID" />
+                <ScalarProperty Name="TBTYPEINFO" ColumnName="TBTYPEINFO" />
+                <ScalarProperty Name="STATUSID" ColumnName="STATUSID" />
+                <ScalarProperty Name="PAYSTATUSID" ColumnName="PAYSTATUSID" />
+                <ScalarProperty Name="ESTATUSID" ColumnName="ESTATUSID" />
+                <ScalarProperty Name="HANDLENAME" ColumnName="HANDLENAME" />
+                <ScalarProperty Name="HANDLEPHONE" ColumnName="HANDLEPHONE" />
+                <ScalarProperty Name="HANDLEID" ColumnName="HANDLEID" />
+                <ScalarProperty Name="ISKEY" ColumnName="ISKEY" />
+                <ScalarProperty Name="FEE" ColumnName="FEE" />
+                <ScalarProperty Name="APPLYID" ColumnName="APPLYID" />
+                <ScalarProperty Name="APPLYDATE" ColumnName="APPLYDATE" />
+                <ScalarProperty Name="DEALNAME" ColumnName="DEALNAME" />
+                <ScalarProperty Name="DEALDATE" ColumnName="DEALDATE" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="CERTTASKSIGN" ColumnName="CERTTASKSIGN" />
+                <ScalarProperty Name="PUBLICKEY" ColumnName="PUBLICKEY" />
+                <ScalarProperty Name="TASKCONTENT" ColumnName="TASKCONTENT" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="APPLYTYPE" ColumnName="APPLYTYPE" />
+                <ScalarProperty Name="AUTHORIZATIONCODE" ColumnName="AUTHORIZATIONCODE" />
+                <ScalarProperty Name="VERIFYDATE" ColumnName="VERIFYDATE" />
+                <ScalarProperty Name="FINISHDATE" ColumnName="FINISHDATE" />
+                <ScalarProperty Name="REQSN" ColumnName="REQSN" />
+                <ScalarProperty Name="ISRECEIPT" ColumnName="ISRECEIPT" />
+                <ScalarProperty Name="DISTRIBUTIONMESSAGE" ColumnName="DISTRIBUTIONMESSAGE" />
+                <ScalarProperty Name="KEYTYPE" ColumnName="KEYTYPE" />
+                <ScalarProperty Name="JINSUITYPE" ColumnName="JINSUITYPE" />
+                <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
+                <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
+                <ScalarProperty Name="RECEIVEDATE" ColumnName="RECEIVEDATE" />
+                <ScalarProperty Name="ISBACK" ColumnName="ISBACK" />
+                <ScalarProperty Name="BACKCANO" ColumnName="BACKCANO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBITEMs">
+            <EntityTypeMapping TypeName="Model.TBITEM">
+              <MappingFragment StoreEntitySet="TBITEM">
+                <ScalarProperty Name="ITEMID" ColumnName="ITEMID" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+                <ScalarProperty Name="FREEPERIOD" ColumnName="FREEPERIOD" />
+                <ScalarProperty Name="ISLIMIT" ColumnName="ISLIMIT" />
+                <ScalarProperty Name="COUNT" ColumnName="COUNT" />
+                <ScalarProperty Name="USECOUNT" ColumnName="USECOUNT" />
+                <ScalarProperty Name="ITEMLEVEL" ColumnName="ITEMLEVEL" />
+                <ScalarProperty Name="ITEMCLIENT" ColumnName="ITEMCLIENT" />
+                <ScalarProperty Name="ITEMDEVELOPERS" ColumnName="ITEMDEVELOPERS" />
+                <ScalarProperty Name="TEMPLATEID" ColumnName="TEMPLATEID" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="ITEMCODE" ColumnName="ITEMCODE" />
+                <ScalarProperty Name="TBITEMTYPEID" ColumnName="TBITEMTYPEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBUSERINFOes">
+            <EntityTypeMapping TypeName="Model.TBUSERINFO">
+              <MappingFragment StoreEntitySet="TBUSERINFO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USERCODE" ColumnName="USERCODE" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="AREACODE" ColumnName="AREACODE" />
+                <ScalarProperty Name="ISSTAFF" ColumnName="ISSTAFF" />
+                <ScalarProperty Name="AGENCYID" ColumnName="AGENCYID" />
+                <ScalarProperty Name="CERTSN" ColumnName="CERTSN" />
+                <ScalarProperty Name="IDCARD" ColumnName="IDCARD" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
