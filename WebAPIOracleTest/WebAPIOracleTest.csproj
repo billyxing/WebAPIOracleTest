@@ -119,7 +119,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\SELF_DOWNLOADCODEController.cs" />
     <Compile Include="Controllers\SELF_ORDERINFOController.cs" />
+    <Compile Include="Controllers\SELF_USRSController.cs" />
     <Compile Include="Controllers\TBITEMsController.cs" />
     <Compile Include="Controllers\TBUSERINFOesController.cs" />
     <Compile Include="Global.asax.cs">
