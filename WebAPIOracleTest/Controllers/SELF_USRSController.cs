@@ -55,7 +55,7 @@ namespace WebAPIOracleTest.Controllers
         }
 
         // GET: api/SELF_USRS
-        [Route("CN/{strcn:string}")]
+        [Route("CN/{strcn}")]
         public IQueryable<SELF_USRS> GetSELF_USRSByCN(string cn)
         {
 

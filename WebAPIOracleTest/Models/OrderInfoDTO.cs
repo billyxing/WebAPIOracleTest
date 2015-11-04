@@ -16,8 +16,6 @@ namespace WebAPIOracleTest.Models
        
         public DateTime? OrderTime { get; set; } //订单创建时间
 
-
-
         public string PaymentType { get; set; } //支付方式
         public string PaymentStatus { get; set; } //支付状态
         public DateTime? PaymentTime { get; set; } //支付时间
@@ -29,6 +27,7 @@ namespace WebAPIOracleTest.Models
         public DateTime? ShippingTime { get; set; } //邮寄时间
         public string ShippingAddress { get; set; } //邮寄地址
         public string ShippingSN { get; set; }//快递单号
+        public string ShippingName { get; set; }//收件人
         public string ShippingPhone { get; set; }//收件人电话
         public string ShippingCode { get; set; }//邮编
         public string DownloadCode { get; set; }//下载码

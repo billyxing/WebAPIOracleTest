@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -48,7 +49,7 @@ namespace WebAPIOracleTest.Controllers
                                      PaymentTime = _order.PAYMENT_DATE,
                                      PaymentId = _order.PAYMENT_ID,
                                      Fee = _order.FEE.HasValue ? _order.FEE.Value : 0,
-
+                                     ShippingName = _order.MAIL_NAME,
                                      ShippingStatus = _order.MAIL_STATE,
                                      ShippingAddress = _order.MAIL_ADDRESS,
                                      ShippingType = _order.MAILTYPE.ToString(),
@@ -71,7 +72,7 @@ namespace WebAPIOracleTest.Controllers
         }
 
         //按订单号查询
-        [Route("OrderId/{orderId:string}")]
+        [Route("OrderId/{orderId:int}")]
         // GET: api/SELF_ORDERINFO
         [ResponseType(typeof(OrderInfoDTO))]
         public async Task<IHttpActionResult> GetSELF_ORDERINFO(string orderId)
@@ -99,7 +100,7 @@ namespace WebAPIOracleTest.Controllers
                      PaymentTime = _order.PAYMENT_DATE,
                      PaymentId = _order.PAYMENT_ID,
                      Fee = _order.FEE.HasValue ? _order.FEE.Value : 0,
-
+                     ShippingName = _order.MAIL_NAME,
                      ShippingStatus = _order.MAIL_STATE,
                      ShippingAddress = _order.MAIL_ADDRESS,
                      ShippingType = _order.MAILTYPE.ToString(),
@@ -162,7 +163,7 @@ namespace WebAPIOracleTest.Controllers
                                             PaymentTime = _order.PAYMENT_DATE,
                                             PaymentId = _order.PAYMENT_ID,
                                             Fee = _order.FEE.HasValue ? _order.FEE.Value : 0,
-
+                                            ShippingName = _order.MAIL_NAME,
                                             ShippingStatus = _order.MAIL_STATE,
                                             ShippingAddress = _order.MAIL_ADDRESS,
                                             ShippingType = _order.MAILTYPE.ToString(),
@@ -197,9 +198,9 @@ namespace WebAPIOracleTest.Controllers
         // PUT: api/SELF_ORDERINFO/5
         [Route("{id:int}")]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutSELF_ORDERINFO(long id, OrderInfoDTO sELF_ORDERINFODTO)
+        public async Task<IHttpActionResult> PutSELF_ORDERINFO(long id,string jsonstr )
         {
-
+            OrderInfoDTO sELF_ORDERINFODTO = JsonConvert.DeserializeObject<OrderInfoDTO>(jsonstr);
             SELF_ORDERINFO sELF_ORDERINFO =await db.SELF_ORDERINFO.FirstOrDefaultAsync(p => p.ID == sELF_ORDERINFODTO.Id);
 
             if(sELF_ORDERINFO==null)
