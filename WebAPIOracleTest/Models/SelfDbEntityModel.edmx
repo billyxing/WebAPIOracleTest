@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="SELF_COMPANYINFO">
           <Key>
             <PropertyRef Name="ID" />
@@ -37,17 +37,17 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="number" Precision="19" Scale="0" Nullable="false" />
-          <Property Name="ITEMID" Type="number" Precision="38" Scale="0" />
+          <Property Name="ITEMID" Type="number" Precision="19" Scale="0" />
           <Property Name="CERTSN" Type="varchar2" MaxLength="50" />
           <Property Name="NEWCERTSN" Type="varchar2" MaxLength="50" />
           <Property Name="ORDER_STATE" Type="varchar2" MaxLength="20" />
           <Property Name="ORDER_DATE" Type="date" />
-          <Property Name="PAYMENT_TYPE" Type="number" Precision="19" Scale="0" />
+          <Property Name="PAYMENT_TYPE" Type="number" Precision="38" Scale="0" />
           <Property Name="PAYMENT_STATE" Type="varchar2" MaxLength="20" />
           <Property Name="PAYMENT_DATE" Type="date" />
           <Property Name="PAYMENT_ID" Type="varchar2" MaxLength="100" />
           <Property Name="FEE" Type="float" Precision="126" Scale="0" />
-          <Property Name="MAILTYPE" Type="number" Precision="19" Scale="0" />
+          <Property Name="MAILTYPE" Type="number" Precision="38" Scale="0" />
           <Property Name="MAIL_ADDRESS" Type="varchar2" MaxLength="200" />
           <Property Name="MAIL_NAME" Type="varchar2" MaxLength="20" />
           <Property Name="MAIL_TELNUM" Type="varchar2" MaxLength="20" />
@@ -196,8 +196,7 @@
           <EntitySet Name="TBITEM" EntityType="Self.TBITEM" Schema="MAPTEST" store:Type="Tables" />
           <EntitySet Name="TBUSERINFO" EntityType="Self.TBUSERINFO" Schema="MAPTEST" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -233,17 +232,17 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" />
-          <Property Name="ITEMID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ITEMID" Type="Int64" />
           <Property Name="CERTSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NEWCERTSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ORDER_STATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ORDER_DATE" Type="DateTime" />
-          <Property Name="PAYMENT_TYPE" Type="Int64" />
+          <Property Name="PAYMENT_TYPE" Type="Int32" />
           <Property Name="PAYMENT_STATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="PAYMENT_DATE" Type="DateTime" />
           <Property Name="PAYMENT_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="FEE" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="MAILTYPE" Type="Int64" />
+          <Property Name="MAILTYPE" Type="Int32" />
           <Property Name="MAIL_ADDRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="MAIL_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="MAIL_TELNUM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />

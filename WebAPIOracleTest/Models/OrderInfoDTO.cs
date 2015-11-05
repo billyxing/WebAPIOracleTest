@@ -30,7 +30,7 @@ namespace WebAPIOracleTest.Models
         public string ShippingName { get; set; }//收件人
         public string ShippingPhone { get; set; }//收件人电话
         public string ShippingCode { get; set; }//邮编
-        public string DownloadCode { get; set; }//下载码
+        //public string DownloadCode { get; set; }//下载码
         public string Misc { get; set; }//备注
 
 

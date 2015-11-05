@@ -28,38 +28,38 @@ namespace WebAPIOracleTest.Controllers
             try
             {
                 
-                if (pageNum < 1) pageNum = 1;
+                if (pageNum < 0) pageNum = 0;
                 if (pageSize < 1) pageSize = 40;
 
                 var resultlist = (from _order in db.SELF_ORDERINFO
-                                 join _item in db.TBITEMs on _order.ITEMID equals _item.ITEMID
-                                 join _user in db.SELF_USRS on _order.USER_ID equals _user.ID
-                                 join _dcode in db.SELF_DOWNLOADCODE on _order.ID equals _dcode.ORDERID
-                                 orderby _order.ORDER_DATE descending
-                                 select new OrderInfoDTO
-                                 {
-                                     OrderId = _order.ID.ToString(),
-                                     OrderStatus = _order.ORDER_STATE,
-                                     OrderTime = _order.ORDER_DATE,
-                                     CompanyName = _user.UNAME,
-                                     ItemName = _item.ITEM,
+                                  join _item in db.TBITEMs on _order.ITEMID equals _item.ITEMID
+                                  join _user in db.SELF_USRS on _order.USER_ID equals _user.ID
+                                  
 
-                                     PaymentType = _order.PAYMENT_TYPE.ToString(),
-                                     PaymentStatus = _order.PAYMENT_STATE,
-                                     PaymentTime = _order.PAYMENT_DATE,
-                                     PaymentId = _order.PAYMENT_ID,
-                                     Fee = _order.FEE.HasValue ? _order.FEE.Value : 0,
-                                     ShippingName = _order.MAIL_NAME,
-                                     ShippingStatus = _order.MAIL_STATE,
-                                     ShippingAddress = _order.MAIL_ADDRESS,
-                                     ShippingType = _order.MAILTYPE.ToString(),
-                                     ShippingTime = _order.MAIL_DATE,
-                                     ShippingSN = _order.MAIL_SN,
-                                     ShippingPhone = _order.MAIL_TELNUM,
-                                     ShippingCode = _order.MAIL_POSTCODE,
-                                     DownloadCode = _dcode.DOWNLOADCODE,
-                                     Misc = _order.MISC
-                                 }).Skip(pageNum * pageSize).Take(pageSize);
+                                  select new OrderInfoDTO
+                                  {
+                                      Id = _order.ID,
+                                      OrderId = _order.ORDER_ID,
+                                      OrderStatus = _order.ORDER_STATE,
+                                      OrderTime = _order.ORDER_DATE,
+                                      CompanyName = _user.UNAME,
+                                      ItemName = _item.ITEM,
+                                      PaymentType = (_order.PAYMENT_TYPE.HasValue?_order.PAYMENT_TYPE.Value.ToString():"0"),
+                                      PaymentStatus = _order.PAYMENT_STATE,
+                                      PaymentTime = _order.PAYMENT_DATE,
+                                      PaymentId = _order.PAYMENT_ID,
+                                      Fee = _order.FEE.HasValue ? _order.FEE.Value : 0,
+                                      ShippingName = _order.MAIL_NAME,
+                                      ShippingStatus = _order.MAIL_STATE,
+                                      ShippingAddress = _order.MAIL_ADDRESS,
+                                     //ShippingType = _order.MAILTYPE.HasValue ? _order.MAILTYPE.Value.ToString() : "0",
+                                      ShippingTime = _order.MAIL_DATE,
+                                      ShippingSN = _order.MAIL_SN,
+                                      ShippingPhone = _order.MAIL_TELNUM,
+                                      ShippingCode = _order.MAIL_POSTCODE,
+                                      //DownloadCode = _dcode.DOWNLOADCODE,
+                                      Misc = _order.MISC
+                                  }).OrderByDescending(p=>p.OrderTime).Skip(pageNum * pageSize).Take(pageSize);
                 return resultlist;
 
                 //return db.SELF_ORDERINFO.OrderByDescending(p => p.ORDER_DATE).Skip(pageNum * pageSize).Take(pageSize);
@@ -72,7 +72,7 @@ namespace WebAPIOracleTest.Controllers
         }
 
         //按订单号查询
-        [Route("OrderId/{orderId:int}")]
+        [Route("OrderId/{orderId}")]
         // GET: api/SELF_ORDERINFO
         [ResponseType(typeof(OrderInfoDTO))]
         public async Task<IHttpActionResult> GetSELF_ORDERINFO(string orderId)
@@ -84,7 +84,7 @@ namespace WebAPIOracleTest.Controllers
                 sELF_ORDERINFO = await (from _order in db.SELF_ORDERINFO
                  join _item in db.TBITEMs on _order.ITEMID equals _item.ITEMID
                  join _user in db.SELF_USRS on _order.USER_ID equals _user.ID
-                 join _dcode in db.SELF_DOWNLOADCODE on _order.ID equals _dcode.ORDERID
+                
                  orderby _order.ORDER_DATE descending
                  select new OrderInfoDTO
                  {
@@ -108,7 +108,7 @@ namespace WebAPIOracleTest.Controllers
                      ShippingSN = _order.MAIL_SN,
                      ShippingPhone = _order.MAIL_TELNUM,
                      ShippingCode = _order.MAIL_POSTCODE,
-                     DownloadCode = _dcode.DOWNLOADCODE,
+                     
                      Misc = _order.MISC
                  }).SingleOrDefaultAsync();
                 
@@ -146,7 +146,7 @@ namespace WebAPIOracleTest.Controllers
                 sELF_ORDERINFO = await (from _order in db.SELF_ORDERINFO
                                         join _item in db.TBITEMs on _order.ITEMID equals _item.ITEMID
                                         join _user in db.SELF_USRS on _order.USER_ID equals _user.ID
-                                        join _dcode in db.SELF_DOWNLOADCODE on _order.ID equals _dcode.ORDERID
+                                        
                                         where _order.ID == id
                                         orderby _order.ORDER_DATE descending
                                         select new OrderInfoDTO
@@ -171,7 +171,7 @@ namespace WebAPIOracleTest.Controllers
                                             ShippingSN = _order.MAIL_SN,
                                             ShippingPhone =_order.MAIL_TELNUM,
                                             ShippingCode = _order.MAIL_POSTCODE,
-                                            DownloadCode =_dcode.DOWNLOADCODE,
+                                            
                                             Misc = _order.MISC
                                         }).FirstOrDefaultAsync();
 
