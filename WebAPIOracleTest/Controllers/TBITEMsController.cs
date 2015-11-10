@@ -20,11 +20,11 @@ namespace WebAPIOracleTest.Controllers
 
 
         // GET: api/TBITEMs
-        [Route("")]
-        public IQueryable<TBITEM> GetTBITEMs()
-        {
-            return db.TBITEMs;
-        }
+        //[Route("")]
+        //public IQueryable<TBITEM> GetTBITEMs()
+        //{
+        //    return db.TBITEMs;
+        //}
 
         // GET: api/TBITEMs/5
         [Route("id:int")]

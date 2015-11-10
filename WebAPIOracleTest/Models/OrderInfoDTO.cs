@@ -16,13 +16,13 @@ namespace WebAPIOracleTest.Models
        
         public DateTime? OrderTime { get; set; } //订单创建时间
 
-        public string PaymentType { get; set; } //支付方式
+        public long PaymentType { get; set; } //支付方式
         public string PaymentStatus { get; set; } //支付状态
         public DateTime? PaymentTime { get; set; } //支付时间
         public string PaymentId { get; set; } //支付流水号
         public decimal Fee { get; set; } //金额
 
-        public string ShippingType { get; set; } //邮寄类型
+        public long ShippingType { get; set; } //邮寄类型
         public string ShippingStatus { get; set; } //邮寄状态
         public DateTime? ShippingTime { get; set; } //邮寄时间
         public string ShippingAddress { get; set; } //邮寄地址

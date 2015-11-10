@@ -20,12 +20,12 @@ namespace WebAPIOracleTest.Models
         public string NEWCERTSN { get; set; }
         public string ORDER_STATE { get; set; }
         public Nullable<System.DateTime> ORDER_DATE { get; set; }
-        public Nullable<int> PAYMENT_TYPE { get; set; }
+        public Nullable<long> PAYMENT_TYPE { get; set; }
         public string PAYMENT_STATE { get; set; }
         public Nullable<System.DateTime> PAYMENT_DATE { get; set; }
         public string PAYMENT_ID { get; set; }
         public Nullable<decimal> FEE { get; set; }
-        public Nullable<int> MAILTYPE { get; set; }
+        public Nullable<long> MAILTYPE { get; set; }
         public string MAIL_ADDRESS { get; set; }
         public string MAIL_NAME { get; set; }
         public string MAIL_TELNUM { get; set; }

@@ -237,12 +237,12 @@
           <Property Name="NEWCERTSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ORDER_STATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ORDER_DATE" Type="DateTime" />
-          <Property Name="PAYMENT_TYPE" Type="Int32" />
+          <Property Name="PAYMENT_TYPE" Type="Int64" />
           <Property Name="PAYMENT_STATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="PAYMENT_DATE" Type="DateTime" />
           <Property Name="PAYMENT_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="FEE" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="MAILTYPE" Type="Int32" />
+          <Property Name="MAILTYPE" Type="Int64" />
           <Property Name="MAIL_ADDRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="MAIL_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="MAIL_TELNUM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />

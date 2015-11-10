@@ -44,7 +44,7 @@ namespace WebAPIOracleTest.Controllers
                                       OrderTime = _order.ORDER_DATE,
                                       CompanyName = _user.UNAME,
                                       ItemName = _item.ITEM,
-                                      PaymentType = (_order.PAYMENT_TYPE.HasValue?_order.PAYMENT_TYPE.Value.ToString():"0"),
+                                      PaymentType = _order.PAYMENT_TYPE.HasValue?_order.PAYMENT_TYPE.Value:0,
                                       PaymentStatus = _order.PAYMENT_STATE,
                                       PaymentTime = _order.PAYMENT_DATE,
                                       PaymentId = _order.PAYMENT_ID,
@@ -52,7 +52,7 @@ namespace WebAPIOracleTest.Controllers
                                       ShippingName = _order.MAIL_NAME,
                                       ShippingStatus = _order.MAIL_STATE,
                                       ShippingAddress = _order.MAIL_ADDRESS,
-                                     //ShippingType = _order.MAILTYPE.HasValue ? _order.MAILTYPE.Value.ToString() : "0",
+                                     ShippingType = _order.MAILTYPE.HasValue ? _order.MAILTYPE.Value : 0,
                                       ShippingTime = _order.MAIL_DATE,
                                       ShippingSN = _order.MAIL_SN,
                                       ShippingPhone = _order.MAIL_TELNUM,
@@ -73,7 +73,6 @@ namespace WebAPIOracleTest.Controllers
 
         //按订单号查询
         [Route("OrderId/{orderId}")]
-        // GET: api/SELF_ORDERINFO
         [ResponseType(typeof(OrderInfoDTO))]
         public async Task<IHttpActionResult> GetSELF_ORDERINFO(string orderId)
         {
@@ -84,7 +83,7 @@ namespace WebAPIOracleTest.Controllers
                 sELF_ORDERINFO = await (from _order in db.SELF_ORDERINFO
                  join _item in db.TBITEMs on _order.ITEMID equals _item.ITEMID
                  join _user in db.SELF_USRS on _order.USER_ID equals _user.ID
-                
+                 where _order.ORDER_ID == orderId
                  orderby _order.ORDER_DATE descending
                  select new OrderInfoDTO
                  {
@@ -95,7 +94,7 @@ namespace WebAPIOracleTest.Controllers
                      CompanyName = _user.UNAME,
                      ItemName = _item.ITEM,
 
-                     PaymentType = _order.PAYMENT_TYPE.ToString(),
+                     PaymentType = _order.PAYMENT_TYPE.HasValue?_order.PAYMENT_TYPE.Value:(0),
                      PaymentStatus = _order.PAYMENT_STATE,
                      PaymentTime = _order.PAYMENT_DATE,
                      PaymentId = _order.PAYMENT_ID,
@@ -103,7 +102,7 @@ namespace WebAPIOracleTest.Controllers
                      ShippingName = _order.MAIL_NAME,
                      ShippingStatus = _order.MAIL_STATE,
                      ShippingAddress = _order.MAIL_ADDRESS,
-                     ShippingType = _order.MAILTYPE.ToString(),
+                     ShippingType = _order.MAILTYPE.HasValue?_order.PAYMENT_TYPE.Value:(0),
                      ShippingTime = _order.MAIL_DATE,
                      ShippingSN = _order.MAIL_SN,
                      ShippingPhone = _order.MAIL_TELNUM,
@@ -158,7 +157,7 @@ namespace WebAPIOracleTest.Controllers
                                             CompanyName = _user.UNAME,
                                             ItemName = _item.ITEM,
 
-                                            PaymentType = _order.PAYMENT_TYPE.ToString(),
+                                            PaymentType = _order.PAYMENT_TYPE.HasValue? _order.PAYMENT_TYPE.Value:0,
                                             PaymentStatus = _order.PAYMENT_STATE,
                                             PaymentTime = _order.PAYMENT_DATE,
                                             PaymentId = _order.PAYMENT_ID,
@@ -166,7 +165,7 @@ namespace WebAPIOracleTest.Controllers
                                             ShippingName = _order.MAIL_NAME,
                                             ShippingStatus = _order.MAIL_STATE,
                                             ShippingAddress = _order.MAIL_ADDRESS,
-                                            ShippingType = _order.MAILTYPE.ToString(),
+                                            ShippingType = _order.MAILTYPE.HasValue?_order.MAILTYPE.Value:0,
                                             ShippingTime = _order.MAIL_DATE,
                                             ShippingSN = _order.MAIL_SN,
                                             ShippingPhone =_order.MAIL_TELNUM,
@@ -195,10 +194,11 @@ namespace WebAPIOracleTest.Controllers
         }
 
         //更新订单信息
-        // PUT: api/SELF_ORDERINFO/5
-        [Route("{id:int}")]
+        // POST: api/SELF_ORDERINFO/5
+        [Route("Update")]
+        [HttpPost]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutSELF_ORDERINFO(long id,string jsonstr )
+        public async Task<IHttpActionResult> PostSELF_ORDERINFO([FromBody]string jsonstr )
         {
             OrderInfoDTO sELF_ORDERINFODTO = JsonConvert.DeserializeObject<OrderInfoDTO>(jsonstr);
             SELF_ORDERINFO sELF_ORDERINFO =await db.SELF_ORDERINFO.FirstOrDefaultAsync(p => p.ID == sELF_ORDERINFODTO.Id);
@@ -221,11 +221,7 @@ namespace WebAPIOracleTest.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != sELF_ORDERINFO.ID)
-            {
-                return BadRequest();
-            }
-
+          
             db.Entry(sELF_ORDERINFO).State = EntityState.Modified;
 
             try
@@ -234,7 +230,7 @@ namespace WebAPIOracleTest.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SELF_ORDERINFOExists(id))
+                if (!SELF_ORDERINFOExists(sELF_ORDERINFODTO.Id))
                 {
                     return NotFound();
                 }
