@@ -200,47 +200,55 @@ namespace WebAPIOracleTest.Controllers
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PostSELF_ORDERINFO([FromBody]string jsonstr )
         {
-            OrderInfoDTO sELF_ORDERINFODTO = JsonConvert.DeserializeObject<OrderInfoDTO>(jsonstr);
-            SELF_ORDERINFO sELF_ORDERINFO =await db.SELF_ORDERINFO.FirstOrDefaultAsync(p => p.ID == sELF_ORDERINFODTO.Id);
-
-            if(sELF_ORDERINFO==null)
+            if (!string.IsNullOrEmpty(jsonstr))
             {
-                return NotFound();
-            }
+                OrderInfoDTO sELF_ORDERINFODTO = JsonConvert.DeserializeObject<OrderInfoDTO>(jsonstr);
+                SELF_ORDERINFO sELF_ORDERINFO = await db.SELF_ORDERINFO.FirstOrDefaultAsync(p => p.ID == sELF_ORDERINFODTO.Id);
 
-            sELF_ORDERINFO.MAIL_SN =sELF_ORDERINFODTO.ShippingSN;
-            sELF_ORDERINFO.MAIL_STATE =sELF_ORDERINFODTO.ShippingStatus;
-            sELF_ORDERINFO.MAIL_DATE = sELF_ORDERINFODTO.ShippingTime;
-            sELF_ORDERINFO.MISC = sELF_ORDERINFODTO.Misc;
-
-            sELF_ORDERINFO.ORDER_STATE = sELF_ORDERINFODTO.OrderStatus;
-
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-          
-            db.Entry(sELF_ORDERINFO).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SELF_ORDERINFOExists(sELF_ORDERINFODTO.Id))
+                if (sELF_ORDERINFO == null)
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return StatusCode(HttpStatusCode.NoContent);
+                sELF_ORDERINFO.MAIL_SN = sELF_ORDERINFODTO.ShippingSN;
+                sELF_ORDERINFO.MAIL_STATE = sELF_ORDERINFODTO.ShippingStatus;
+                sELF_ORDERINFO.MAIL_DATE = sELF_ORDERINFODTO.ShippingTime;
+                sELF_ORDERINFO.MISC = sELF_ORDERINFODTO.Misc;
+
+                sELF_ORDERINFO.ORDER_STATE = sELF_ORDERINFODTO.OrderStatus;
+
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+
+                db.Entry(sELF_ORDERINFO).State = EntityState.Modified;
+
+                try
+                {
+                    await db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!SELF_ORDERINFOExists(sELF_ORDERINFODTO.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        //throw;
+                        return StatusCode(HttpStatusCode.NotModified);
+                    }
+                }
+
+                return StatusCode(HttpStatusCode.OK); 
+            }
+            else
+            {
+                return StatusCode(HttpStatusCode.BadRequest);
+            }
         }
 
        
