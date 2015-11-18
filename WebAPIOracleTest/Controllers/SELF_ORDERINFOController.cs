@@ -23,7 +23,7 @@ namespace WebAPIOracleTest.Controllers
         //分页查询
         [Route("{pageNum:int}/{pageSize:int}")]
         // GET: api/SELF_ORDERINFO
-        public IQueryable<OrderInfoDTO> GetSELF_ORDERINFOByPage(int pageNum,int pageSize)
+        public IResultObj<OrderInfoDTO> GetSELF_ORDERINFOByPage(int pageNum,int pageSize)
         {
             try
             {
@@ -60,14 +60,31 @@ namespace WebAPIOracleTest.Controllers
                                       //DownloadCode = _dcode.DOWNLOADCODE,
                                       Misc = _order.MISC
                                   }).OrderByDescending(p=>p.OrderTime).Skip(pageNum * pageSize).Take(pageSize);
-                return resultlist;
+
+                IResultObj<OrderInfoDTO> result = new OrderRequestResultObj();
+                result.Msg = "Success";
+                if (resultlist.Count() > 0)
+                {
+                    result.ResultCode = "200";  //查询成功，有数据
+                    result.Result = resultlist;
+                }
+                else
+                {
+                    result.ResultCode = "201"; //查询成功，无数据
+                }
+
+                return result;
 
                 //return db.SELF_ORDERINFO.OrderByDescending(p => p.ORDER_DATE).Skip(pageNum * pageSize).Take(pageSize);
             }
             catch (Exception ex)
             {
                 Configuration.Services.GetTraceWriter().Error(Request, "SELF_ORDERINFO_GetOrderByPage", ex);
-                return null;
+                IResultObj<OrderInfoDTO> result = new OrderRequestResultObj();
+                result.Msg = "Exception"; //异常
+                result.ResultCode = "202"; //查询失败，异常
+               
+                return result;
             }
         }
 
