@@ -130,6 +130,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderInfoDTO.cs" />
+    <Compile Include="Models\OrderRequestResultObj.cs" />
+    <Compile Include="Models\IResultObj.cs" />
     <Compile Include="Models\SelfDbEntityModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

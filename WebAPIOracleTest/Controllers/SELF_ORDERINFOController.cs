@@ -23,7 +23,8 @@ namespace WebAPIOracleTest.Controllers
         //分页查询
         [Route("{pageNum:int}/{pageSize:int}")]
         // GET: api/SELF_ORDERINFO
-        public IResultObj<OrderInfoDTO> GetSELF_ORDERINFOByPage(int pageNum,int pageSize)
+        [ResponseType(typeof(OrderInfoDTO))]
+        public async Task<IHttpActionResult> GetSELF_ORDERINFOByPage(int pageNum,int pageSize)
         {
             try
             {
@@ -61,30 +62,32 @@ namespace WebAPIOracleTest.Controllers
                                       Misc = _order.MISC
                                   }).OrderByDescending(p=>p.OrderTime).Skip(pageNum * pageSize).Take(pageSize);
 
-                IResultObj<OrderInfoDTO> result = new OrderRequestResultObj();
-                result.Msg = "Success";
+               // IResultObj<OrderInfoDTO> result = new OrderRequestResultObj();
+                //result.Msg = "Success";
                 if (resultlist.Count() > 0)
                 {
-                    result.ResultCode = "200";  //查询成功，有数据
-                    result.Result = resultlist;
+                    //result.ResultCode = "200";  //查询成功，有数据
+                    // result.Result = resultlist;
+                    return Ok(resultlist);
                 }
                 else
                 {
-                    result.ResultCode = "201"; //查询成功，无数据
+                    //result.ResultCode = "201"; //查询成功，无数据
+                    return NotFound();
                 }
 
-                return result;
+                //return result;
 
                 //return db.SELF_ORDERINFO.OrderByDescending(p => p.ORDER_DATE).Skip(pageNum * pageSize).Take(pageSize);
             }
             catch (Exception ex)
             {
                 Configuration.Services.GetTraceWriter().Error(Request, "SELF_ORDERINFO_GetOrderByPage", ex);
-                IResultObj<OrderInfoDTO> result = new OrderRequestResultObj();
-                result.Msg = "Exception"; //异常
-                result.ResultCode = "202"; //查询失败，异常
-               
-                return result;
+                //IResultObj<OrderInfoDTO> result = new OrderRequestResultObj();
+                //result.Msg = "Exception"; //异常
+                //result.ResultCode = "202"; //查询失败，异常
+                return BadRequest();
+                //return result;
             }
         }
 
@@ -132,8 +135,9 @@ namespace WebAPIOracleTest.Controllers
             }
             catch (Exception ex)
             {
-                sELF_ORDERINFO = null;
+                //sELF_ORDERINFO = null;
                 Configuration.Services.GetTraceWriter().Error(Request, "SELF_ORDERINFO_GetOrderByOrderId", ex);
+                return BadRequest();
             }
 
             if (sELF_ORDERINFO == null)
@@ -195,8 +199,9 @@ namespace WebAPIOracleTest.Controllers
             }
             catch (Exception ex)
             {
-                sELF_ORDERINFO = null;
+                //sELF_ORDERINFO = null;
                 Configuration.Services.GetTraceWriter().Error(Request, "SELF_ORDERINFO_GetOrderByOrderId", ex);
+                return BadRequest();
             }
 
 
