@@ -27,8 +27,8 @@ namespace WebAPIOracleTest.Controllers
         //}
 
         // GET: api/TBITEMs/5
-        [Route("id:int")]
-        [ResponseType(typeof(TBITEM))]
+        [Route("{id:int}")]
+        [ResponseType(typeof(TbitemDTO))]
         public async Task<IHttpActionResult> GetTBITEM(long id)
         {
             TBITEM tBITEM = await db.TBITEMs.FindAsync(id);
@@ -37,7 +37,16 @@ namespace WebAPIOracleTest.Controllers
                 return NotFound();
             }
 
-            return Ok(tBITEM);
+            TbitemDTO item = new TbitemDTO()
+            {
+                ItemId = tBITEM.ITEMID,
+                Item = tBITEM.ITEM,
+                ItemClient = tBITEM.ITEMCLIENT,
+                Remark = tBITEM.REMARK
+            };
+
+
+            return Ok(item);
         }
 
        

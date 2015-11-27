@@ -9,11 +9,14 @@ namespace WebAPIOracleTest.Models
     {
         public long Id { get; set; }//序号
         public string OrderId { get; set; } //订单号
-        
+
+        public string CertSN { get; set; }
+        public string NewCertSN { get; set; }
+
         public string OrderStatus { get; set; } //订单状态
         public string CompanyName { get; set; } //客户（或单位）名称
         public string ItemName { get; set; } //项目名称
-       
+        public long Itemid { get; set; }//项目编号
         public DateTime? OrderTime { get; set; } //订单创建时间
 
         public long PaymentType { get; set; } //支付方式

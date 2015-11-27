@@ -24,7 +24,7 @@ namespace WebAPIOracleTest.Controllers
         [Route("{pageNum:int}/{pageSize:int}")]
         // GET: api/SELF_ORDERINFO
         [ResponseType(typeof(OrderInfoDTO))]
-        public async Task<IHttpActionResult> GetSELF_ORDERINFOByPage(int pageNum,int pageSize)
+        public  IHttpActionResult GetSELF_ORDERINFOByPage(int pageNum,int pageSize)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace WebAPIOracleTest.Controllers
                 var resultlist = (from _order in db.SELF_ORDERINFO
                                   join _item in db.TBITEMs on _order.ITEMID equals _item.ITEMID
                                   join _user in db.SELF_USRS on _order.USER_ID equals _user.ID
-                                  
+
 
                                   select new OrderInfoDTO
                                   {
@@ -43,8 +43,11 @@ namespace WebAPIOracleTest.Controllers
                                       OrderId = _order.ORDER_ID,
                                       OrderStatus = _order.ORDER_STATE,
                                       OrderTime = _order.ORDER_DATE,
+                                      CertSN = _order.CERTSN,
+                                      NewCertSN = _order.NEWCERTSN,
                                       CompanyName = _user.UNAME,
                                       ItemName = _item.ITEM,
+                                      Itemid = _order.ITEMID.HasValue ? _order.ITEMID.Value : 0,
                                       PaymentType = _order.PAYMENT_TYPE.HasValue?_order.PAYMENT_TYPE.Value:0,
                                       PaymentStatus = _order.PAYMENT_STATE,
                                       PaymentTime = _order.PAYMENT_DATE,
@@ -109,11 +112,13 @@ namespace WebAPIOracleTest.Controllers
                  {
                      Id = _order.ID,
                      OrderId = _order.ORDER_ID,
+                     CertSN = _order.CERTSN,
+                     NewCertSN = _order.NEWCERTSN,
                      OrderStatus = _order.ORDER_STATE,
                      OrderTime = _order.ORDER_DATE,
                      CompanyName = _user.UNAME,
                      ItemName = _item.ITEM,
-
+                     Itemid = _order.ITEMID.HasValue ? _order.ITEMID.Value : 0,
                      PaymentType = _order.PAYMENT_TYPE.HasValue?_order.PAYMENT_TYPE.Value:(0),
                      PaymentStatus = _order.PAYMENT_STATE,
                      PaymentTime = _order.PAYMENT_DATE,
@@ -175,9 +180,11 @@ namespace WebAPIOracleTest.Controllers
                                             OrderId = _order.ORDER_ID,
                                             OrderStatus = _order.ORDER_STATE,
                                             OrderTime = _order.ORDER_DATE,
+                                            CertSN = _order.CERTSN,
+                                            NewCertSN = _order.NEWCERTSN,
                                             CompanyName = _user.UNAME,
                                             ItemName = _item.ITEM,
-
+                                            Itemid = _order.ITEMID.HasValue?_order.ITEMID.Value:0,
                                             PaymentType = _order.PAYMENT_TYPE.HasValue? _order.PAYMENT_TYPE.Value:0,
                                             PaymentStatus = _order.PAYMENT_STATE,
                                             PaymentTime = _order.PAYMENT_DATE,
@@ -232,12 +239,22 @@ namespace WebAPIOracleTest.Controllers
                     return NotFound();
                 }
 
+                sELF_ORDERINFO.MAIL_ADDRESS = sELF_ORDERINFODTO.ShippingAddress;
+                sELF_ORDERINFO.MAIL_TELNUM = sELF_ORDERINFODTO.ShippingPhone;
                 sELF_ORDERINFO.MAIL_SN = sELF_ORDERINFODTO.ShippingSN;
                 sELF_ORDERINFO.MAIL_STATE = sELF_ORDERINFODTO.ShippingStatus;
                 sELF_ORDERINFO.MAIL_DATE = sELF_ORDERINFODTO.ShippingTime;
+
                 sELF_ORDERINFO.MISC = sELF_ORDERINFODTO.Misc;
 
+                sELF_ORDERINFO.PAYMENT_STATE = sELF_ORDERINFODTO.PaymentStatus;
+                sELF_ORDERINFO.PAYMENT_TYPE = sELF_ORDERINFODTO.PaymentType;
+                sELF_ORDERINFO.PAYMENT_DATE = sELF_ORDERINFODTO.PaymentTime;
+                sELF_ORDERINFO.PAYMENT_ID = sELF_ORDERINFODTO.PaymentId;
+
                 sELF_ORDERINFO.ORDER_STATE = sELF_ORDERINFODTO.OrderStatus;
+
+
 
 
                 if (!ModelState.IsValid)

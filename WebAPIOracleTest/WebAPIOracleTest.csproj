@@ -124,6 +124,7 @@
     <Compile Include="Controllers\SELF_DOWNLOADCODEController.cs" />
     <Compile Include="Controllers\SELF_ORDERINFOController.cs" />
     <Compile Include="Controllers\SELF_USRSController.cs" />
+    <Compile Include="Controllers\TBCERTsController.cs" />
     <Compile Include="Controllers\TBITEMsController.cs" />
     <Compile Include="Controllers\TBUSERINFOesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -163,12 +164,14 @@
     <Compile Include="Models\TBCERT.cs">
       <DependentUpon>SelfDbEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TbcertDTO.cs" />
     <Compile Include="Models\TBCERTTASK.cs">
       <DependentUpon>SelfDbEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TBITEM.cs">
       <DependentUpon>SelfDbEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TbitemDTO.cs" />
     <Compile Include="Models\TBUSERINFO.cs">
       <DependentUpon>SelfDbEntityModel.tt</DependentUpon>
     </Compile>
@@ -183,6 +186,7 @@
     <Content Include="Models\SelfDbEntityModel.edmx.diagram">
       <DependentUpon>SelfDbEntityModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\localiis.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
